@@ -13,7 +13,7 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.mdp.kafka.def.KafkaConstants;
 
-public class PrintEarthquakeTweets {
+public class PeakDetector {
 	public static final String[] EARTHQUAKE_SUBSTRINGS = new String[] { "terremoto", "temblor", "sismo", "quake" };
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException{

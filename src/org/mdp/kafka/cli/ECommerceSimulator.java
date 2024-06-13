@@ -12,7 +12,7 @@ import org.apache.kafka.clients.producer.Producer;
 import org.mdp.kafka.def.KafkaConstants;
 import org.mdp.kafka.sim.TwitterStream;
 
-public class TwitterSimulator {
+public class ECommerceSimulator {
 	public static int TWEET_ID = 2;
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException{

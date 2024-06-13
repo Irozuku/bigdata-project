@@ -23,8 +23,8 @@ public class Main {
 				StringBuffer sb = new StringBuffer();
 				sb.append("missing <utility> arg where <utility> one of");
 				sb.append("\n\t"+KafkaExample.class.getSimpleName()+": Self-contained example of [producer+consumer]");
-				sb.append("\n\t"+TwitterSimulator.class.getSimpleName()+": Simulate Twitter stream [3 producers]");
-				sb.append("\n\t"+PrintEarthquakeTweets.class.getSimpleName()+": Find and print records with earthquake keywords [consumer]");
+				sb.append("\n\t"+ECommerceSimulator.class.getSimpleName()+": Simulate Twitter stream [3 producers]");
+				sb.append("\n\t"+PeakDetector.class.getSimpleName()+": Find and print records with earthquake keywords [consumer]");
 				
 				usage(sb.toString());
 			}
