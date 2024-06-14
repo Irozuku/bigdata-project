@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.TimeZone;
@@ -52,8 +53,25 @@ public class ECommerceStream implements Runnable {
 					
 					wait = calculateWait(timeData);
 					
-					// TODO: get a unique id for every event
-					String idStr = "ID DE CADA OPERACION";
+					// replace the category with the prefix (example : electronics.audio.headphone -> electronics)
+					tabs[4] = tabs[4].split("\\.")[0];
+					
+					// replace every "nan" or empty space in category row to 'unknown'
+			        if (tabs[4].equals("nan") || tabs[4].isEmpty()) {
+			        	tabs[4] = "unknown";
+			        }
+			        
+			        // replace line read with previous modifications
+			        String result = Arrays.toString(tabs).replaceAll(",\\s*", ",");
+			        result = result.replaceAll("[\\[\\]]","");
+			        // this happens if the last column is empty (user-session)
+			        if (!result.equals(line)) {
+				        result = result + ",";
+			        }
+			        line = result;
+					
+					// we assing a unique id considering event_time + product_id + user_id
+					String idStr = tabs[0] + tabs[2] + tabs[7];
 					
 					if(wait>0){
 						Thread.sleep(wait);
