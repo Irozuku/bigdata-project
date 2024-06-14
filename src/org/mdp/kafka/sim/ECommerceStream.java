@@ -70,7 +70,7 @@ public class ECommerceStream implements Runnable {
 			        }
 			        line = result;
 					
-					// we assing a unique id considering event_time + product_id + user_id
+					// create a unique id considering event_time + product_id + user_id
 					String idStr = tabs[0] + tabs[2] + tabs[7];
 					
 					if(wait>0){
