@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.TimeZone;
 
 import org.apache.kafka.clients.producer.Producer;
@@ -70,8 +71,9 @@ public class ECommerceStream implements Runnable {
 			        }
 			        line = result;
 					
-					// create a unique id considering event_time + product_id + user_id
-					String idStr = tabs[0] + tabs[2] + tabs[7];
+					// create a unique id considering event_time + product_id + user_id + random float
+			        Random rand = new Random();
+					String idStr = tabs[0] + tabs[2] + tabs[7] + Float.toString(rand.nextFloat());
 					
 					if(wait>0){
 						Thread.sleep(wait);
