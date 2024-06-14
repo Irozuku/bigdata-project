@@ -5,41 +5,43 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.zip.GZIPInputStream;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.mdp.kafka.def.KafkaConstants;
-import org.mdp.kafka.sim.TwitterStream;
+import org.mdp.kafka.sim.ECommerceStream;
 
 public class ECommerceSimulator {
-	public static int TWEET_ID = 2;
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException{
-		if(args.length!=3){
-			System.err.println("Usage: [tweet_file_gzipped] [tweet_topic] [speed_up (int)]");
+		if(args.length!=2){
+			System.err.println("Usage: [ecommerce_file_gzipped] [speed_up (int)]");
 			return;
 		}
 		
-		BufferedReader tweets = new BufferedReader(new InputStreamReader(new GZIPInputStream (new FileInputStream(args[0]))));
+		BufferedReader eventsECommerce = new BufferedReader(new InputStreamReader(new GZIPInputStream (new FileInputStream(args[0]))));
+
+		List<String> eventTopics = new ArrayList<>(Arrays.asList("view", "cart", "remove_from_cart", "purchase"));
 		
-		String tweetTopic = args[1];
+		int speedUp = Integer.parseInt(args[1]);
 		
-		int speedUp = Integer.parseInt(args[2]);
+		Producer<String, String> eventProducer = new KafkaProducer<String, String>(KafkaConstants.PROPS);
+		ECommerceStream eCommerceStream = new ECommerceStream(eventsECommerce, eventProducer, eventTopics, speedUp);
 		
-		Producer<String, String> tweetProducer = new KafkaProducer<String, String>(KafkaConstants.PROPS);
-		TwitterStream tweetStream = new TwitterStream(tweets, TWEET_ID, tweetProducer, tweetTopic, speedUp);
+		Thread eCommerceThread = new Thread(eCommerceStream);
 		
-		Thread tweetThread = new Thread(tweetStream);
-		
-		tweetThread.start();
+		eCommerceThread.start();
 		
 		try{
-			tweetThread.join();
+			eCommerceThread.join();
 		} catch(InterruptedException e){
 			System.err.println("Interrupted!");
 		}
 		
-		tweetProducer.close();
+		eventProducer.close();
 	}
 }
