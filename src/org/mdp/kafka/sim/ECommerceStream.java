@@ -72,7 +72,7 @@ public class ECommerceStream implements Runnable {
 			        }
 			        line = result;
 					
-					// TODO
+					// id of every event
 					String idStr = Long.toString(idCounter++);
 					
 					if(wait>0){
