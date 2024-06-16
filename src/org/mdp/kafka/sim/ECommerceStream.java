@@ -21,6 +21,7 @@ public class ECommerceStream implements Runnable {
 	long startSim = 0;
 	long startData = 0;
 	long lastData = 0;
+	long idCounter = 0;
 	int speedup;
 	Producer<String, String> producer;
 	List<String> topics;
@@ -71,9 +72,8 @@ public class ECommerceStream implements Runnable {
 			        }
 			        line = result;
 					
-					// create a unique id considering event_time + product_id + user_id + random float
-			        Random rand = new Random();
-					String idStr = tabs[0] + tabs[2] + tabs[7] + Float.toString(rand.nextFloat());
+					// TODO
+					String idStr = Long.toString(idCounter++);
 					
 					if(wait>0){
 						Thread.sleep(wait);
