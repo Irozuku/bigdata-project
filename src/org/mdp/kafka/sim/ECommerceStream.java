@@ -78,7 +78,8 @@ public class ECommerceStream implements Runnable {
 						Thread.sleep(wait);
 					}
 					if (topics.contains(tabs[1])) {
-						producer.send(new ProducerRecord<String,String>(tabs[1], 0, timeData, idStr, line));
+						String topic = tabs[1] + "_g8";
+						producer.send(new ProducerRecord<String,String>(topic, 0, timeData, idStr, line));
 					}
 				} catch(ParseException | NumberFormatException pe){
 					System.err.println("Cannot parse date "+tabs[0]);

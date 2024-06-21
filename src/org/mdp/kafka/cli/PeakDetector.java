@@ -14,7 +14,6 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.mdp.kafka.def.KafkaConstants;
 
 public class PeakDetector {
-	public static final String[] EARTHQUAKE_SUBSTRINGS = new String[] { "terremoto", "temblor", "sismo", "quake" };
 	
 	public static void main(String[] args) throws FileNotFoundException, IOException{
 		if(args.length!=1){
@@ -39,18 +38,7 @@ public class PeakDetector {
 				
 				// for all records in the batch
 				for (ConsumerRecord<String, String> record : records) {
-					String lowercase = record.value().toLowerCase();
-					
-					// check if record value contains keyword
-					// (could be optimised a lot)
-					for(String ek: EARTHQUAKE_SUBSTRINGS){
-						// if so print it out to the console
-						if(lowercase.contains(ek)){
-							System.out.println(record.value());
-							// prevents multiple prints of the same tweet with multiple keywords
-							break;
-						}
-					}
+					System.out.println(record.value());
 				}
 			}
 		} finally{
