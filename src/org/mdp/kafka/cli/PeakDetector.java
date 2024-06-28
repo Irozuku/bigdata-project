@@ -47,6 +47,13 @@ public class PeakDetector {
 			return;
 		}
 		
+		// Print the list of pairs after ctrl+c (START_EVENT_TIME, FINISH_EVENT_TIME)
+	    Runtime.getRuntime().addShutdownHook(new Thread() {
+	        public void run() {
+	          System.out.println(peakEvents);
+	        }
+	      });
+		
 		try {
 			FIFO_SIZE = Integer.valueOf(args[1]);
 			EVENT_START_TIME_INTERVAL = Integer.valueOf(args[2]) * 1000;
@@ -65,8 +72,6 @@ public class PeakDetector {
             System.err.println("Invalid integer input for numEvents/timePeak");
             return;
         } 
-		
-		
 
 		Properties props = KafkaConstants.PROPS;
 
@@ -125,8 +130,7 @@ public class PeakDetector {
 					}
 				}
 			}
-		} finally{
-			System.out.println(peakEvents.toString());
+		} finally {
 			consumer.close();
 		}
 	}
