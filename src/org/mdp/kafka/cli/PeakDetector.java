@@ -59,12 +59,12 @@ public class PeakDetector {
 			EVENT_START_TIME_INTERVAL = Integer.valueOf(args[2]) * 1000;
 			EVEN_END_TIME_INTERVAL = 2 * EVENT_START_TIME_INTERVAL;
 			if (args.length == 4) {
-				if (!CATEGORIES.contains(args[4])) {
+				if (!CATEGORIES.contains(args[3])) {
 					System.err.println("Not a valid category");
 					System.err.println(CATEGORIES.toString());
 		            return;
 				}
-				category = args[4];
+				category = args[3];
 				
 			}
 			
