@@ -38,9 +38,3 @@ As spoken before, this project was build on top of the Kafka framework for Java,
     "START event-id: [id] : start: [UNIX_TIME] value: [ROW] rate: [numEvents] records in [timePeak] ms"
     "END event: [id] : finish: [UNIX_TIME] value: [ROW] rate: [numEvents] records in [timePeak] ms"
     ```
-
-## Results
-
-
-## Conclusions
-
