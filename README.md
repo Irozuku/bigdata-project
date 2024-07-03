@@ -16,7 +16,7 @@ As spoken before, this project was build on top of the Kafka framework for Java,
 1. Theres a class available in ECommerceStream that reads the dataset compressed as a gzip and then reproduces the stream of data 
 
 
-<img src="./img/framework.png">
+<img src="./img/steps.png">
 
 1. Clone this repository or download it into your machine
 2. Run the build.xml to obtain a jar file
